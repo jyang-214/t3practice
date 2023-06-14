@@ -2,6 +2,7 @@ import { type FormEvent } from "react";
 import { api } from "~/utils/api";
 import type { Task } from "@prisma/client";
 import getReloader from "./Reloader";
+import { string } from "zod";
 export const TaskController = () => {
   const reload = getReloader();
 
@@ -41,21 +42,20 @@ export const TaskController = () => {
   //---------------------------
 
   //----------DELETE-----------
-  // Delete Tasks Handler
-/* <- Delete this line
-  const deleteTask = (task: Task) => {
-    deleteTaskMutation.mutate({  });
-  };
   //Delete Tasks Mutation
   const deleteTaskMutation = api.task.delete.useMutation({
     onSuccess: reload,
   });
- Delete this line -> */
+  // Delete Tasks Handler
+  const deleteTask = (task: Task) => {
+    deleteTaskMutation.mutate({ id: task.id });
+  };
+
   //---------------------------
 
   return {
     handleToggleCompleted: updateTask,
-    // -> UNCOMMENT THIS LINE handleDelete: deleteTask,
+    handleDelete: deleteTask,
     getFilteredTasks: getTasks,
     handleSubmit: createTask,
   };

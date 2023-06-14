@@ -5,7 +5,7 @@ export const SingleTask: React.FC<Task> = (task: Task) => {
   const taskTitle = `label-text text-2xl ${
     task.completed ? "line-through" : ""
   }`;
-  const { handleToggleCompleted, /*handleDelete*/ } = TaskController();
+  const { handleToggleCompleted, handleDelete } = TaskController();
   return (
     <li key={task.id} className="taskItem">
       <div className="taskItemContainer">
@@ -21,7 +21,7 @@ export const SingleTask: React.FC<Task> = (task: Task) => {
           <span className={taskTitle}>{task.title}</span>
         </label>
         <button
-          // onClick={() => handleDelete && handleDelete(task)}
+          onClick={() => handleDelete && handleDelete(task)}
           className="taskItemDeleteBtn"
         >
           <svg
